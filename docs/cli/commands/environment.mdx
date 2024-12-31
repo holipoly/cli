@@ -1,0 +1,431 @@
+# environment
+
+## Manage Holipoly Cloud environments
+
+### environment
+
+```sh
+$ holipoly environment --help
+```
+
+Help output:
+
+```
+holipoly environment [command]
+
+Manage Holipoly Cloud environments
+
+Commands:
+  holipoly environment auth [key|environment]         Manage basic auth for a specific environment
+  holipoly environment clear <key|environment>        Clear database for an environment
+  holipoly environment cors [key|environment]         Manage environment's CORS
+  holipoly environment create [name]                  Create a new environment
+  holipoly environment list                           List environments
+  holipoly environment maintenance [key|environment]  Enable or disable maintenance mode in a specific environment
+  holipoly environment origins [key|environment]      Manage the environment's trusted client origins
+  holipoly environment populate [key|environment]     Populate database for an environment
+  holipoly environment promote [key|environment]      Promote environment to production
+  holipoly environment remove [key|environment]       Delete an environment
+  holipoly environment show [key|environment]         Show a specific environment
+  holipoly environment switch [key|environment]       Make the provided environment the default one
+  holipoly environment update [key|environment]       Update the name of the environment
+  holipoly environment upgrade [key|environment]      Upgrade a Holipoly version in a specific environment
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### environment auth
+
+```sh
+$ holipoly environment auth --help
+```
+
+Help output:
+
+```
+holipoly environment auth [key|environment]
+
+Manage basic auth for a specific environment
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json              Output the data as JSON  [boolean] [default: false]
+      --short             Output data as text  [boolean] [default: false]
+  -u, --instance, --url   Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --login             basic auth login of the environment  [string]
+      --password, --pass  basic auth password of the environment  [string]
+      --disable           disable basic auth for the environment  [boolean]
+  -V, --version           Show version number  [boolean]
+  -h, --help              Show help  [boolean]
+
+Examples:
+  holipoly env auth
+  holipoly env auth my-environment
+  holipoly env auth my-environment --login=holipoly --password=holipoly
+  holipoly env auth my-environment --disable
+```
+
+#### environment clear
+
+```sh
+$ holipoly environment clear --help
+```
+
+Help output:
+
+```
+holipoly environment clear <key|environment>
+
+Clear database for an environment
+
+Positionals:
+  key, environment  key of the environment  [string] [required]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly env clear my-environment
+  holipoly env clear my-environment --organization="organization-slug"
+```
+
+#### environment cors
+
+```sh
+$ holipoly environment cors --help
+```
+
+Help output:
+
+```
+holipoly environment cors [key|environment]
+
+Manage environment's CORS
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --all              All origins are allowed  [boolean]
+      --dashboard        Only dashboard is allowed  [boolean]
+      --selected         Only specified origins are allowed  [array]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly env cors
+  holipoly env cors my-environment --all
+  holipoly env cors my-environment --dashboard
+  holipoly env cors my-environment --selected="https://example.com"
+```
+
+#### environment create
+
+```sh
+$ holipoly environment create --help
+```
+
+Help output:
+
+```
+holipoly environment create [name]
+
+Create a new environment
+
+Positionals:
+  name  name for the new environment  [string]
+
+Options:
+      --json                  Output the data as JSON  [boolean] [default: false]
+      --short                 Output data as text  [boolean] [default: false]
+  -u, --instance, --url       Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --project               create this environment in this project  [string]
+      --database              specify how to populate the database  [string]
+      --holipoly              specify the Holipoly version  [string]
+      --domain                specify the domain for the environment  [string]
+      --login                 specify the API Basic Auth login  [string]
+      --pass                  specify the API Basic Auth password  [string]
+      --restore-from          specify snapshot id to restore the database from  [string]
+      --skip-webhooks-update  use with `restore-from` option, skip webhooks update prompt when restoring from snapshot  [boolean]
+      --skip-restrict         skip Basic Auth restriction prompt  [boolean]
+  -V, --version               Show version number  [boolean]
+  -h, --help                  Show help  [boolean]
+
+Examples:
+  holipoly env create my-environment
+  holipoly env create my-environment --project="project-name" --database="sample" --holipoly="holipoly-master-staging" --domain="project-domain" --skip-restrict
+  holipoly env create my-environment --organization="organization-slug" --project="project-name" --database="sample" --holipoly="holipoly-master-staging" --domain="project-domain" --skip-restrict
+```
+
+#### environment list
+
+```sh
+$ holipoly environment list --help
+```
+
+Help output:
+
+```
+holipoly environment list
+
+List environments
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --extended         show extended table  [boolean] [default: false]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### environment maintenance
+
+```sh
+$ holipoly environment maintenance --help
+```
+
+Help output:
+
+```
+holipoly environment maintenance [key|environment]
+
+Enable or disable maintenance mode in a specific environment
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --enable           enable maintenance mode  [boolean]
+      --disable          disable maintenance mode  [boolean]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly env maintenance
+  holipoly env maintenance my-environment
+  holipoly env maintenance my-environment --enable
+  holipoly env maintenance my-environment --disable
+```
+
+#### environment origins
+
+```sh
+$ holipoly environment origins --help
+```
+
+Help output:
+
+```
+holipoly environment origins [key|environment]
+
+Manage the environment's trusted client origins
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --origins          Allowed domains  [array]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly env origins
+  holipoly env origins my-environment --origins=https://trusted-origin.com
+```
+
+#### environment populate
+
+```sh
+$ holipoly environment populate --help
+```
+
+Help output:
+
+```
+holipoly environment populate [key|environment]
+
+Populate database for an environment
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### environment promote
+
+```sh
+$ holipoly environment promote --help
+```
+
+Help output:
+
+```
+holipoly environment promote [key|environment]
+
+Promote environment to production
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --holipoly         specify the Holipoly version  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### environment remove
+
+```sh
+$ holipoly environment remove --help
+```
+
+Help output:
+
+```
+holipoly environment remove [key|environment]
+
+Delete an environment
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --force            skip confirmation prompt  [boolean]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### environment show
+
+```sh
+$ holipoly environment show --help
+```
+
+Help output:
+
+```
+holipoly environment show [key|environment]
+
+Show a specific environment
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### environment switch
+
+```sh
+$ holipoly environment switch --help
+```
+
+Help output:
+
+```
+holipoly environment switch [key|environment]
+
+Make the provided environment the default one
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### environment update
+
+```sh
+$ holipoly environment update --help
+```
+
+Help output:
+
+```
+holipoly environment update [key|environment]
+
+Update the name of the environment
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --name             name of the environment  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly env update
+  holipoly env update my-environment
+  holipoly env update my-environment --name=renamed-env
+```
+
+#### environment upgrade
+
+```sh
+$ holipoly environment upgrade --help
+```
+
+Help output:
+
+```
+holipoly environment upgrade [key|environment]
+
+Upgrade a Holipoly version in a specific environment
+
+Positionals:
+  key, environment  key of the environment  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```

@@ -1,0 +1,74 @@
+name: Execute nightly tests
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1-5'
+
+  repository_dispatch:
+    types: [automation-tests-event]
+
+jobs:
+  run-functional-tests:
+    if: ${{ github.event_name != 'repository_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Prepare holipoly CLI
+        run: pnpm build
+
+      - name: Write config file
+        id: write-config-file
+        env:
+          CLI_ACCESS_TOKEN: ${{ secrets.CLI_ACCESS_TOKEN }}
+          CLI_GITHUB_TOKEN: ${{ secrets.CLI_GITHUB_TOKEN }}
+          CLI_VERCEL_TOKEN: ${{ secrets.CLI_VERCEL_TOKEN }}
+          TEST_COMMAND: 'node dist/holipoly.js'
+        run: echo '{"token":"${{ secrets.CLI_ACCESS_TOKEN }}","telemetry":"false","holipoly_env":"staging","cloud_api_url":"https://staging-cloud.holipoly.io/platform/api", "github_token":"${{ secrets.CLI_GITHUB_TOKEN }}", "vercel_token":"${{ secrets.CLI_VERCEL_TOKEN }}"  }' > ~/.config/holipoly.json
+
+      - name: pre run
+        env:
+          HOLIPOLY_CLI_ENV: staging
+          RUN_FUNCTIONAL_TESTS: true
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          node dist/holipoly.js info
+          node dist/holipoly.js status
+
+      - name: clear cloud projects
+        env:
+          HOLIPOLY_CLI_ENV: staging
+          RUN_FUNCTIONAL_TESTS: true
+        run: |
+          pnpm vitest run test/clear_cloud.test.ts
+
+      - name: run tests
+        env:
+          RUN_FUNCTIONAL_TESTS: true
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config --global user.name 'GA-holipoly-cli'
+          git config --global user.email 'GA-holipoly-cli@users.noreply.github.com'
+          pnpm vitest test/functional -t '^((?!(deploy|tunnel)).)*$' --no-threads
+
+      - name: Notify Slack
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_SNAP_RESTORE }}
+          SLACK_USERNAME: FunctionalTestsBot
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_TITLE: "Functional tests failed"
+          SLACK_MESSAGE: "https://github.com/holipoly/holipoly-cli/actions/workflows/tests-nightly.yml"
+          MSG_MINIMAL: true

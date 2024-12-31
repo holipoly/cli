@@ -1,0 +1,169 @@
+# backup
+
+## Manage Holipoly Cloud backups
+
+### backup
+
+```sh
+$ holipoly backup --help
+```
+
+Help output:
+
+```
+holipoly backup [command]
+
+Manage Holipoly Cloud backups
+
+Commands:
+  holipoly backup list                      List backups of the organization
+  holipoly backup create [name]             Create a new backup
+  holipoly backup show [backup|backup-key]  Show a specific backup
+  holipoly backup remove <key|backup>       Remove the backup
+  holipoly backup restore [from]            Restore a specific backup
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### backup list
+
+```sh
+$ holipoly backup list --help
+```
+
+Help output:
+
+```
+holipoly backup list
+
+List backups of the organization
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --name             filter the output for name for backup  [string]
+      --latest           show only the latest backup  [boolean] [default: false]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly backup list
+  holipoly backup list --organization="organization-slug"
+```
+
+#### backup create
+
+```sh
+$ holipoly backup create --help
+```
+
+Help output:
+
+```
+holipoly backup create [name]
+
+Create a new backup
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --name             name for the new backup  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly backup create
+  holipoly backup create my-backup --organization="organization-slug"
+```
+
+#### backup show
+
+```sh
+$ holipoly backup show --help
+```
+
+Help output:
+
+```
+holipoly backup show [backup|backup-key]
+
+Show a specific backup
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly backup show
+  holipoly backup show
+  holipoly backup show backup-key
+  holipoly backup show backup-key --organization="organization-slug"
+```
+
+#### backup remove
+
+```sh
+$ holipoly backup remove --help
+```
+
+Help output:
+
+```
+holipoly backup remove <key|backup>
+
+Remove the backup
+
+Positionals:
+  key, backup  key of the backup  [string] [required]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --force            skip confirmation prompt  [boolean]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly backup remove
+  holipoly backup remove backup-key --force
+  holipoly backup remove backup-key --force --organization="organization-slug"
+```
+
+#### backup restore
+
+```sh
+$ holipoly backup restore --help
+```
+
+Help output:
+
+```
+holipoly backup restore [from]
+
+Restore a specific backup
+
+Options:
+      --json                  Output the data as JSON  [boolean] [default: false]
+      --short                 Output data as text  [boolean] [default: false]
+  -u, --instance, --url       Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --from                  the key of the snapshot  [string]
+      --skip-webhooks-update  skip webhooks update prompt  [boolean]
+  -V, --version               Show version number  [boolean]
+  -h, --help                  Show help  [boolean]
+
+Examples:
+  holipoly backup restore
+  holipoly backup restore --from="backup-key" --skip-webhooks-update
+  holipoly backup restore --from="backup-key" --skip-webhooks-update --organization="organization-slug" --environment="env-id-or-name"
+```

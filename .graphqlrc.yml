@@ -1,0 +1,11 @@
+schema: https://vercel.holipoly.cloud/graphql/
+documents: src/graphql/**/*.graphql
+extensions:
+  codegen:
+    overwrite: true
+    generates:
+      src/generated/graphql.ts:
+        plugins:
+          - typescript-document-nodes
+        config:
+          gqlImport: 'graphql-tag#gql'

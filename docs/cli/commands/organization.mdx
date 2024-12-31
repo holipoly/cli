@@ -1,0 +1,146 @@
+# organization
+
+## Manage Holipoly Cloud organizations
+
+### organization
+
+```sh
+$ holipoly organization --help
+```
+
+Help output:
+
+```
+holipoly organization [command]
+
+Manage Holipoly Cloud organizations
+
+Commands:
+  holipoly organization show [slug|organization]         Show a specific organization
+  holipoly organization list                             List organizations
+  holipoly organization remove [slug]                    Remove the organization
+  holipoly organization permissions [slug|organization]  List organization permissions
+  holipoly organization switch [slug]                    Make the provided organization the default one
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### organization show
+
+```sh
+$ holipoly organization show --help
+```
+
+Help output:
+
+```
+holipoly organization show [slug|organization]
+
+Show a specific organization
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### organization list
+
+```sh
+$ holipoly organization list --help
+```
+
+Help output:
+
+```
+holipoly organization list
+
+List organizations
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### organization remove
+
+```sh
+$ holipoly organization remove --help
+```
+
+Help output:
+
+```
+holipoly organization remove [slug]
+
+Remove the organization
+
+Positionals:
+  slug  slug of the organization  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --force            skip confirmation prompt  [boolean]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### organization permissions
+
+```sh
+$ holipoly organization permissions --help
+```
+
+Help output:
+
+```
+holipoly organization permissions [slug|organization]
+
+List organization permissions
+
+Positionals:
+  slug, organization  slug of the organization  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### organization switch
+
+```sh
+$ holipoly organization switch --help
+```
+
+Help output:
+
+```
+holipoly organization switch [slug]
+
+Make the provided organization the default one
+
+Positionals:
+  slug  slug of the organization  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```

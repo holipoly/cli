@@ -1,0 +1,287 @@
+# app
+
+## Manage Holipoly Apps
+
+### app
+
+```sh
+$ holipoly app --help
+```
+
+Help output:
+
+```
+holipoly app [command]
+
+Manage Holipoly Apps
+
+Commands:
+  holipoly app list                List installed Holipoly Apps for an environment
+  holipoly app install             Install a Holipoly App by URL
+  holipoly app uninstall <app-id>  Uninstall a Holipoly App by ID. You need to provide `appId`. List available apps and their IDs with `holipoly app list`.
+  holipoly app create [name]       Create a new Holipoly Local App
+  holipoly app tunnel [port]       Expose your Holipoly app remotely with ngrok tunnel
+  holipoly app token               Create a Holipoly App token
+  holipoly app permission          Add or remove permission for a Holipoly App
+  holipoly app template [name]     Create an App with Holipoly App Template
+  holipoly app remove [app-id]     Create a new Holipoly Local App
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### app list
+
+```sh
+$ holipoly app list --help
+```
+
+Help output:
+
+```
+holipoly app list
+
+List installed Holipoly Apps for an environment
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app list
+```
+
+#### app install
+
+```sh
+$ holipoly app install --help
+```
+
+Help output:
+
+```
+holipoly app install
+
+Install a Holipoly App by URL
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --via-dashboard  [boolean] [default: false]
+      --app-name         Application name  [string]
+      --manifest-URL     Application Manifest URL  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app install --manifest-URL="https://my-holipoly-app.com/api/manifest
+  holipoly app install --manifest-URL="https://my-holipoly-app.com/api/manifest --app-name="Holipoly app"
+  holipoly app install --organization="organization-slug" --environment="env-id-or-name" --app-name="Holipoly app" --manifest-URL="https://my-holipoly-app.com/api/manifest"
+```
+
+#### app uninstall
+
+```sh
+$ holipoly app uninstall --help
+```
+
+Help output:
+
+```
+holipoly app uninstall <app-id>
+
+Uninstall a Holipoly App by ID. You need to provide `appId`. List available apps and their IDs with `holipoly app list`.
+
+Positionals:
+  app-id  The Holipoly App id  [string] [required]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app uninstall app-id
+  holipoly app uninstall app-id --organization="organization-slug" --environment="env-id-or-name"
+```
+
+#### app create
+
+```sh
+$ holipoly app create --help
+```
+
+Help output:
+
+```
+holipoly app create [name]
+
+Create a new Holipoly Local App
+
+Positionals:
+  name  name for the new Local App  [string]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --permissions      The array of permissions  [array]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app create --name="my holipoly app" --permissions=MANAGE_USERS --permissions=MANAGE_STAFF
+  holipoly app create --name="my holipoly app" --organization="organization-slug" --environment="env-id-or-name" --permissions=MANAGE_USERS --permissions=MANAGE_STAFF
+```
+
+#### app tunnel
+
+```sh
+$ holipoly app tunnel --help
+```
+
+Help output:
+
+```
+holipoly app tunnel [port]
+
+Expose your Holipoly app remotely with ngrok tunnel
+
+Positionals:
+  port  [number] [default: 3000]
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --name             The application name for installation in the Dashboard  [string]
+      --force-install    Force the Holipoly App Install  [boolean] [default: false]
+      --manifest-path    The application's manifest path  [string] [default: "/api/manifest"]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app tunnel --name="Custom name"
+  holipoly app tunnel --force-install
+  holipoly app tunnel --manifest-path="/app/manifest"
+  holipoly app tunnel --organization="organization-slug" --environment="env-id-or-name"
+```
+
+#### app token
+
+```sh
+$ holipoly app token --help
+```
+
+Help output:
+
+```
+holipoly app token
+
+Create a Holipoly App token
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --app-id           The Holipoly App id  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app token
+  holipoly app token --app-id="app-id"
+  holipoly app token --app-id="app-id=" --organization="organization-slug" --environment="env-id-or-name"
+```
+
+#### app permission
+
+```sh
+$ holipoly app permission --help
+```
+
+Help output:
+
+```
+holipoly app permission
+
+Add or remove permission for a Holipoly App
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --app-id           The Holipoly App id  [string]
+      --permissions      The array of permissions  [array]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app permission --app-id="app-id" --permissions=MANAGE_USERS --permissions=MANAGE_STAFF
+  holipoly app permission --organization="organization-slug" --environment="env-id-or-name" --app-id="app-id" --permissions=MANAGE_USERS --permissions=MANAGE_STAFF
+```
+
+#### app template
+
+```sh
+$ holipoly app template --help
+```
+
+Help output:
+
+```
+holipoly app template [name]
+
+Create an App with Holipoly App Template
+
+Positionals:
+  name  [string] [default: "my-holipoly-app"]
+
+Options:
+      --json                            Output the data as JSON  [boolean] [default: false]
+      --short                           Output data as text  [boolean] [default: false]
+  -u, --instance, --url                 Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --dependencies, --deps  [boolean] [default: true]
+  -t, --template, --repo, --repository  [string] [default: "holipoly/holipoly-app-template"]
+  -b, --branch  [string] [default: "main"]
+  -e, --example  [string]
+  -V, --version                         Show version number  [boolean]
+  -h, --help                            Show help  [boolean]
+```
+
+#### app remove
+
+```sh
+$ holipoly app remove --help
+```
+
+Help output:
+
+```
+holipoly app remove [app-id]
+
+Create a new Holipoly Local App
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --app-id           The Holipoly App id  [string]
+      --force            skip confirmation prompt  [boolean]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly app remove
+  holipoly app remove --app-id="app-id" --environment="env-id-or-name" --force
+```

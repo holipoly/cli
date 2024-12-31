@@ -1,0 +1,143 @@
+# webhook
+
+## Manage the environment's webhooks
+
+### webhook
+
+```sh
+$ holipoly webhook --help
+```
+
+Help output:
+
+```
+holipoly webhook [command]
+
+Manage the environment's webhooks
+
+Commands:
+  holipoly webhook list     List webhooks for an environment
+  holipoly webhook create   Create a new webhook
+  holipoly webhook edit     Edit a webhook
+  holipoly webhook update   Update webhooks for an environment
+  holipoly webhook dry-run  Webhook dry run
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### webhook list
+
+```sh
+$ holipoly webhook list --help
+```
+
+Help output:
+
+```
+holipoly webhook list
+
+List webhooks for an environment
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### webhook create
+
+```sh
+$ holipoly webhook create --help
+```
+
+Help output:
+
+```
+holipoly webhook create
+
+Create a new webhook
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### webhook edit
+
+```sh
+$ holipoly webhook edit --help
+```
+
+Help output:
+
+```
+holipoly webhook edit
+
+Edit a webhook
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### webhook update
+
+```sh
+$ holipoly webhook update --help
+```
+
+Help output:
+
+```
+holipoly webhook update
+
+Update webhooks for an environment
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+```
+
+#### webhook dry-run
+
+```sh
+$ holipoly webhook dry-run --help
+```
+
+Help output:
+
+```
+holipoly webhook dry-run
+
+Webhook dry run
+
+Options:
+      --json             Output the data as JSON  [boolean] [default: false]
+      --short            Output data as text  [boolean] [default: false]
+  -u, --instance, --url  Holipoly instance API URL (must start with the protocol, i.e. https:// or http://)  [string]
+      --object-id        Object ID to perform dry run on  [string]
+      --query            Subscription query  [string]
+  -V, --version          Show version number  [boolean]
+  -h, --help             Show help  [boolean]
+
+Examples:
+  holipoly webhook dry-run
+  holipoly webhook dry-run --query='subscription { event { ... on ProductCreated { product { id name } } } }'
+  holipoly webhook dry-run --object-id='UHJvZHVjdDo3Mg=='
+```
